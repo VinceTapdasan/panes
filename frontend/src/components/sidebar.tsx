@@ -2,14 +2,16 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Files, Code2, LogOut } from "lucide-react";
+import { LayoutDashboard, Files, Code2, LogOut, LogIn } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { useAuth } from "@/context/auth-context";
 
 const NAV_ITEMS = [
   { label: "Home", href: "/", icon: LayoutDashboard },
@@ -18,6 +20,7 @@ const NAV_ITEMS = [
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const { user, loading, signInWithGoogle, signOut } = useAuth();
 
   return (
     <aside className="hidden lg:flex w-[272px] shrink-0 border-r border-border h-screen sticky top-0 flex-col">
@@ -27,9 +30,7 @@ export default function Sidebar() {
           <div className="w-8 h-8 rounded-md bg-brand flex items-center justify-center">
             <Code2 className="w-4 h-4 text-brand-foreground" />
           </div>
-          <span className="text-sm text-foreground font-semibold">
-            Panes
-          </span>
+          <span className="text-sm text-foreground font-semibold">Panes</span>
         </Link>
       </div>
 
@@ -60,21 +61,57 @@ export default function Sidebar() {
         })}
       </nav>
 
-      {/* Log out */}
-      <div className="px-3 pb-6">
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button
-              variant="ghost"
-              disabled
-              className="w-full justify-start gap-3 px-4 py-3 h-auto text-muted-foreground/40 cursor-not-allowed font-medium text-sm"
-            >
-              <LogOut className="w-[18px] h-[18px]" />
-              Log out
-            </Button>
-          </TooltipTrigger>
-          <TooltipContent side="right">Requires backend</TooltipContent>
-        </Tooltip>
+      {/* User section */}
+      <div className="px-3 pb-6 space-y-3">
+        {/* User info */}
+        {user && (
+          <div className="flex items-center gap-3 px-4 py-2">
+            <Avatar className="w-8 h-8">
+              <AvatarImage src={user.photoURL || undefined} />
+              <AvatarFallback className="bg-secondary text-xs">
+                {user.displayName?.charAt(0) || user.email?.charAt(0) || "U"}
+              </AvatarFallback>
+            </Avatar>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-medium text-foreground truncate">
+                {user.displayName || "User"}
+              </p>
+              <p className="text-xs text-muted-foreground truncate">
+                {user.email}
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Auth button */}
+        {loading ? (
+          <Button
+            variant="ghost"
+            disabled
+            className="w-full justify-start gap-3 px-4 py-3 h-auto text-muted-foreground/40 font-medium text-sm"
+          >
+            <LogOut className="w-[18px] h-[18px]" />
+            Loading...
+          </Button>
+        ) : user ? (
+          <Button
+            variant="ghost"
+            onClick={signOut}
+            className="w-full justify-start gap-3 px-4 py-3 h-auto text-muted-foreground hover:text-foreground hover:bg-white/5 font-medium text-sm"
+          >
+            <LogOut className="w-[18px] h-[18px]" />
+            Sign out
+          </Button>
+        ) : (
+          <Button
+            variant="ghost"
+            onClick={signInWithGoogle}
+            className="w-full justify-start gap-3 px-4 py-3 h-auto text-muted-foreground hover:text-foreground hover:bg-white/5 font-medium text-sm"
+          >
+            <LogIn className="w-[18px] h-[18px]" />
+            Sign in
+          </Button>
+        )}
       </div>
     </aside>
   );
