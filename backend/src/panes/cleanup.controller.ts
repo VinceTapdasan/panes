@@ -7,6 +7,7 @@ import {
   Headers,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { SkipThrottle } from '@nestjs/throttler';
 import { CleanupService } from './cleanup.service';
 import type { CleanupResult } from './cleanup.service';
 
@@ -19,8 +20,10 @@ export class CleanupController {
 
   // POST /panes/cleanup - Trigger cleanup of expired panes
   // Protected by API key (for Cloud Scheduler / cron)
+  // Skip rate limiting for scheduled jobs
   @Post()
   @HttpCode(HttpStatus.OK)
+  @SkipThrottle()
   async triggerCleanup(
     @Headers('x-cleanup-key') cleanupKey: string,
   ): Promise<CleanupResult> {
