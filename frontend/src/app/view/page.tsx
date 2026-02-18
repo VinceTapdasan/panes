@@ -6,19 +6,8 @@ import Link from "next/link";
 import { useFile } from "@/context/file-context";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import {
-  Code2,
-  LayoutDashboard,
-  Upload,
-  Link2,
-  Loader2,
-  Monitor,
-} from "lucide-react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Code2, LayoutDashboard, Upload, Link2, Loader2, Monitor } from "lucide-react";
 
 export default function ViewPage() {
   const router = useRouter();
@@ -65,9 +54,7 @@ export default function ViewPage() {
             >
               Viewing
             </Badge>
-            <span className="text-sm text-foreground truncate">
-              {fileName}
-            </span>
+            <span className="text-sm text-foreground truncate">{fileName}</span>
           </div>
         </div>
 
@@ -130,13 +117,9 @@ export default function ViewPage() {
       <div className="flex items-center justify-between px-4 sm:px-6 py-2 border-t border-border shrink-0">
         <div className="flex items-center gap-1.5">
           <Monitor className="w-3 h-3 text-muted-foreground/40" />
-          <span className="text-[11px] text-muted-foreground/40 font-normal">
-            Preview
-          </span>
+          <span className="text-[11px] text-muted-foreground/40 font-normal">Preview</span>
         </div>
-        <span className="text-[11px] text-muted-foreground/40 font-normal">
-          Client-side render
-        </span>
+        <span className="text-[11px] text-muted-foreground/40 font-normal">Client-side render</span>
       </div>
     </div>
   );

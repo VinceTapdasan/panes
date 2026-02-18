@@ -10,7 +10,11 @@ import { FirebaseService } from '../firebase/firebase.service';
 import { Timestamp } from 'firebase-admin/firestore';
 import { nanoid } from 'nanoid';
 import type { Pane, PaneDocument } from './entities/pane.entity';
-import type { PaneResponse, UploadResponse, PaneListResponse } from './dto/pane-response.dto';
+import type {
+  PaneResponse,
+  UploadResponse,
+  PaneListResponse,
+} from './dto/pane-response.dto';
 
 const COLLECTION = 'panes';
 const STORAGE_PREFIX = 'panes';
@@ -26,8 +30,10 @@ export class PanesService {
     private readonly config: ConfigService,
   ) {
     this.ttlHours = this.config.get<number>('PANE_TTL_HOURS') || 72;
-    this.maxSizeBytes = (this.config.get<number>('PANE_MAX_SIZE_MB') || 5) * 1024 * 1024;
-    this.frontendUrl = this.config.get<string>('FRONTEND_URL') || 'http://localhost:3000';
+    this.maxSizeBytes =
+      (this.config.get<number>('PANE_MAX_SIZE_MB') || 5) * 1024 * 1024;
+    this.frontendUrl =
+      this.config.get<string>('FRONTEND_URL') || 'http://localhost:3000';
   }
 
   // Validate uploaded file
@@ -42,12 +48,16 @@ export class PanesService {
     }
 
     if (file.size > this.maxSizeBytes) {
-      throw new BadRequestException(`File size exceeds ${this.maxSizeBytes / 1024 / 1024}MB limit`);
+      throw new BadRequestException(
+        `File size exceeds ${this.maxSizeBytes / 1024 / 1024}MB limit`,
+      );
     }
 
     // Check content type
     if (file.mimetype !== 'text/html') {
-      throw new BadRequestException('Invalid file type. Only text/html allowed');
+      throw new BadRequestException(
+        'Invalid file type. Only text/html allowed',
+      );
     }
   }
 
@@ -71,7 +81,10 @@ export class PanesService {
   }
 
   // Upload a new pane
-  async upload(file: Express.Multer.File, userId: string): Promise<UploadResponse> {
+  async upload(
+    file: Express.Multer.File,
+    userId: string,
+  ): Promise<UploadResponse> {
     this.validateFile(file);
 
     const firestore = this.firebase.firestore;
@@ -95,7 +108,9 @@ export class PanesService {
 
     // Calculate expiration
     const now = Timestamp.now();
-    const expiresAt = Timestamp.fromMillis(now.toMillis() + this.ttlHours * 60 * 60 * 1000);
+    const expiresAt = Timestamp.fromMillis(
+      now.toMillis() + this.ttlHours * 60 * 60 * 1000,
+    );
 
     // Create Firestore document
     const paneDoc: PaneDocument = {
@@ -161,9 +176,14 @@ export class PanesService {
   // Increment view count
   private async incrementViewCount(id: string): Promise<void> {
     const firestore = this.firebase.firestore;
-    await firestore.collection(COLLECTION).doc(id).update({
-      viewCount: (await import('firebase-admin/firestore')).FieldValue.increment(1),
-    });
+    await firestore
+      .collection(COLLECTION)
+      .doc(id)
+      .update({
+        viewCount: (
+          await import('firebase-admin/firestore')
+        ).FieldValue.increment(1),
+      });
   }
 
   // List user's panes
@@ -189,7 +209,11 @@ export class PanesService {
   }
 
   // Delete pane (owner only, or system cleanup)
-  async delete(id: string, userId: string, isSystemCleanup = false): Promise<void> {
+  async delete(
+    id: string,
+    userId: string,
+    isSystemCleanup = false,
+  ): Promise<void> {
     const firestore = this.firebase.firestore;
     const storage = this.firebase.storage;
 

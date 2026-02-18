@@ -13,8 +13,7 @@ const syne = Syne({
 
 export const metadata: Metadata = {
   title: "Panes",
-  description:
-    "Upload and preview HTML files in your browser. No servers, no nonsense.",
+  description: "Upload and preview HTML files in your browser. No servers, no nonsense.",
 };
 
 export default function RootLayout({

@@ -7,11 +7,7 @@ import { LayoutDashboard, Files, Code2, Menu, X, LogOut } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const NAV_ITEMS = [
   { label: "Home", href: "/", icon: LayoutDashboard },
@@ -29,23 +25,13 @@ export default function MobileNav() {
           <div className="w-7 h-7 rounded-md bg-brand flex items-center justify-center">
             <Code2 className="w-3.5 h-3.5 text-brand-foreground" />
           </div>
-          <span className="text-sm text-foreground font-semibold">
-            Panes
-          </span>
+          <span className="text-sm text-foreground font-semibold">Panes</span>
         </Link>
 
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="text-foreground cursor-pointer"
-            >
-              {open ? (
-                <X className="w-5 h-5" />
-              ) : (
-                <Menu className="w-5 h-5" />
-              )}
+            <Button variant="ghost" size="icon" className="text-foreground cursor-pointer">
+              {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </Button>
           </SheetTrigger>
           <SheetContent
@@ -54,17 +40,11 @@ export default function MobileNav() {
           >
             {/* Brand */}
             <div className="px-6 py-6 border-b border-border">
-              <Link
-                href="/"
-                onClick={() => setOpen(false)}
-                className="flex items-center gap-2.5"
-              >
+              <Link href="/" onClick={() => setOpen(false)} className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-md bg-brand flex items-center justify-center">
                   <Code2 className="w-4 h-4 text-brand-foreground" />
                 </div>
-                <span className="text-sm text-foreground font-semibold">
-                  Panes
-                </span>
+                <span className="text-sm text-foreground font-semibold">Panes</span>
               </Link>
             </div>
 
@@ -72,9 +52,7 @@ export default function MobileNav() {
             <nav className="flex-1 p-3 space-y-1">
               {NAV_ITEMS.map((item) => {
                 const isActive =
-                  item.href === "/"
-                    ? pathname === "/"
-                    : pathname.startsWith(item.href);
+                  item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
                 const Icon = item.icon;
 
                 return (
@@ -86,7 +64,7 @@ export default function MobileNav() {
                       "flex items-center gap-3 px-4 py-3 rounded-md text-sm font-medium transition-all duration-200",
                       isActive
                         ? "bg-brand/10 text-brand"
-                        : "text-muted-foreground hover:bg-white/5 hover:text-foreground"
+                        : "text-muted-foreground hover:bg-white/5 hover:text-foreground",
                     )}
                   >
                     <Icon className="w-[18px] h-[18px]" />
@@ -109,9 +87,7 @@ export default function MobileNav() {
                     Log out
                   </Button>
                 </TooltipTrigger>
-                <TooltipContent side="right">
-                  Requires backend
-                </TooltipContent>
+                <TooltipContent side="right">Requires backend</TooltipContent>
               </Tooltip>
             </div>
           </SheetContent>

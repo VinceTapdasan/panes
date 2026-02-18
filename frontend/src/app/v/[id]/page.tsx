@@ -6,11 +6,7 @@ import Link from "next/link";
 import { api, type PaneResponse } from "@/lib/api";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import {
   Code2,
   LayoutDashboard,
@@ -41,10 +37,7 @@ export default function PaneViewPage() {
         setError(null);
 
         // Fetch metadata and content in parallel
-        const [paneData, content] = await Promise.all([
-          api.getPane(id),
-          api.getPaneRaw(id),
-        ]);
+        const [paneData, content] = await Promise.all([api.getPane(id), api.getPaneRaw(id)]);
 
         setPane(paneData);
         setHtmlContent(content);
@@ -136,9 +129,7 @@ export default function PaneViewPage() {
             >
               Viewing
             </Badge>
-            <span className="text-sm text-foreground truncate">
-              {pane.originalName}
-            </span>
+            <span className="text-sm text-foreground truncate">{pane.originalName}</span>
           </div>
         </div>
 
@@ -209,13 +200,9 @@ export default function PaneViewPage() {
       <div className="flex items-center justify-between px-4 sm:px-6 py-2 border-t border-border shrink-0">
         <div className="flex items-center gap-1.5">
           <Monitor className="w-3 h-3 text-muted-foreground/40" />
-          <span className="text-[11px] text-muted-foreground/40 font-normal">
-            Preview
-          </span>
+          <span className="text-[11px] text-muted-foreground/40 font-normal">Preview</span>
         </div>
-        <span className="text-[11px] text-muted-foreground/40 font-normal">
-          ID: {id}
-        </span>
+        <span className="text-[11px] text-muted-foreground/40 font-normal">ID: {id}</span>
       </div>
     </div>
   );

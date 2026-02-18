@@ -3,12 +3,16 @@
   "private": true,
   "scripts": {
     "dev": "concurrently \"npm run dev:fe\" \"npm run dev:be\"",
-    "dev:fe": "npm --prefix frontend run dev",
-    "dev:be": "npm --prefix backend run start:dev",
+    "dev:fe": "cd frontend && npm run dev",
+    "dev:be": "cd backend && npm run start:dev",
     "build": "npm run build:fe && npm run build:be",
     "build:fe": "npm --prefix frontend run build",
     "build:be": "npm --prefix backend run build",
-    "lint": "npm --prefix frontend run lint"
+    "install:all": "npm install && npm --prefix frontend install && npm --prefix backend install",
+    "lint": "npm --prefix frontend run lint && npm --prefix backend run lint",
+    "lint:fix": "npm --prefix frontend run lint -- --fix && npm --prefix backend run lint",
+    "format": "npx prettier --write \"frontend/src/**/*.{ts,tsx,css}\" \"backend/src/**/*.ts\"",
+    "format:check": "npx prettier --check \"frontend/src/**/*.{ts,tsx,css}\" \"backend/src/**/*.ts\""
   },
   "devDependencies": {
     "concurrently": "^9.1.2"

@@ -1,13 +1,7 @@
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  FileCode,
-  Eye,
-  TrendingUp,
-  HardDrive,
-  Inbox,
-} from "lucide-react";
+import { FileCode, Eye, TrendingUp, HardDrive, Inbox } from "lucide-react";
 
 const STATS = [
   { label: "Total files", value: "0", icon: FileCode },
@@ -22,17 +16,12 @@ export default function RightPanel() {
       {/* Stats */}
       <Card className="bg-card border-border">
         <CardContent className="pt-4 pb-3">
-          <p className="text-[13px] font-semibold text-foreground mb-3">
-            Overview
-          </p>
+          <p className="text-[13px] font-semibold text-foreground mb-3">Overview</p>
           <div className="space-y-3">
             {STATS.map((stat) => {
               const Icon = stat.icon;
               return (
-                <div
-                  key={stat.label}
-                  className="flex items-center justify-between"
-                >
+                <div key={stat.label} className="flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
                     <Icon className="w-4 h-4 text-muted-foreground/50" />
                     <span className="text-[13px] text-muted-foreground font-normal">
@@ -52,16 +41,12 @@ export default function RightPanel() {
       {/* Recent uploads */}
       <Card className="bg-card border-border">
         <CardContent className="pt-4 pb-3">
-          <p className="text-[13px] font-semibold text-foreground mb-3">
-            Recent uploads
-          </p>
+          <p className="text-[13px] font-semibold text-foreground mb-3">Recent uploads</p>
           <div className="flex flex-col items-center gap-2 py-6">
             <div className="w-10 h-10 rounded-md bg-secondary flex items-center justify-center">
               <Inbox className="w-4 h-4 text-muted-foreground/40" />
             </div>
-            <p className="text-[13px] text-muted-foreground font-normal">
-              No uploads yet
-            </p>
+            <p className="text-[13px] text-muted-foreground font-normal">No uploads yet</p>
           </div>
         </CardContent>
       </Card>

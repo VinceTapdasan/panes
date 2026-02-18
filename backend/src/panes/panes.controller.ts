@@ -17,7 +17,11 @@ import { AuthGuard } from '../auth/auth.guard';
 import { CurrentUser } from '../auth/auth.decorator';
 import { PanesService } from './panes.service';
 import type { FirebaseUser } from '../auth/auth.types';
-import type { PaneResponse, UploadResponse, PaneListResponse } from './dto/pane-response.dto';
+import type {
+  PaneResponse,
+  UploadResponse,
+  PaneListResponse,
+} from './dto/pane-response.dto';
 
 @Controller('panes')
 export class PanesController {
@@ -68,7 +72,7 @@ export class PanesController {
     res.setHeader(
       'Content-Security-Policy',
       "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https:; " +
-      "frame-ancestors 'self' http://localhost:* https://*.panes.dev",
+        "frame-ancestors 'self' http://localhost:* https://*.panes.dev",
     );
     res.setHeader(
       'Content-Disposition',

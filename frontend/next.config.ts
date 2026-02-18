@@ -6,6 +6,11 @@ const nextConfig: NextConfig = {
 
   // Disable x-powered-by header
   poweredByHeader: false,
+
+  // Pin Turbopack root to frontend/ so it resolves modules from here, not the monorepo root
+  turbopack: {
+    root: __dirname,
+  },
 };
 
 export default nextConfig;

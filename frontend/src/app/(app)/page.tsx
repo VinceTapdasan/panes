@@ -69,7 +69,7 @@ export default function DashboardPage() {
         setIsLoading(false);
       }
     },
-    [user, uploadPane, setFile, router]
+    [user, uploadPane, setFile, router],
   );
 
   const handleDrop = useCallback(
@@ -79,7 +79,7 @@ export default function DashboardPage() {
       const file = e.dataTransfer.files[0];
       if (file) processFile(file);
     },
-    [processFile]
+    [processFile],
   );
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
@@ -97,7 +97,7 @@ export default function DashboardPage() {
       const file = e.target.files?.[0];
       if (file) processFile(file);
     },
-    [processFile]
+    [processFile],
   );
 
   const handleClick = () => {
@@ -135,7 +135,7 @@ export default function DashboardPage() {
             : isDragging
               ? "border-brand bg-brand/5 cursor-pointer"
               : "border-border hover:border-muted-foreground/30 cursor-pointer",
-          isLoading && "pointer-events-none opacity-60"
+          isLoading && "pointer-events-none opacity-60",
         )}
         onClick={handleClick}
         onDrop={handleDrop}
@@ -157,9 +157,7 @@ export default function DashboardPage() {
               </div>
 
               <div className="text-center">
-                <p className="text-sm font-medium text-foreground">
-                  Upload complete!
-                </p>
+                <p className="text-sm font-medium text-foreground">Upload complete!</p>
                 <p className="text-xs text-muted-foreground font-normal mt-1.5">
                   Your HTML file is ready to share
                 </p>
@@ -173,12 +171,7 @@ export default function DashboardPage() {
                   readOnly
                   className="flex-1 bg-transparent text-sm text-foreground outline-none"
                 />
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={handleCopy}
-                  className="shrink-0"
-                >
+                <Button variant="ghost" size="sm" onClick={handleCopy} className="shrink-0">
                   {copied ? (
                     <Check className="w-4 h-4 text-green-500" />
                   ) : (
@@ -189,17 +182,10 @@ export default function DashboardPage() {
 
               {/* Actions */}
               <div className="flex items-center gap-3">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={handleReset}
-                >
+                <Button variant="outline" size="sm" onClick={handleReset}>
                   Upload another
                 </Button>
-                <Button
-                  size="sm"
-                  onClick={() => window.open(uploadResult.shareUrl, "_blank")}
-                >
+                <Button size="sm" onClick={() => window.open(uploadResult.shareUrl, "_blank")}>
                   Open preview
                 </Button>
               </div>
@@ -209,7 +195,7 @@ export default function DashboardPage() {
               <div
                 className={cn(
                   "w-14 h-14 rounded-md flex items-center justify-center transition-colors",
-                  isDragging ? "bg-brand/20" : "bg-secondary"
+                  isDragging ? "bg-brand/20" : "bg-secondary",
                 )}
               >
                 {isDragging ? (
@@ -221,9 +207,7 @@ export default function DashboardPage() {
 
               <div className="text-center">
                 <p className="text-sm font-medium text-foreground">
-                  {isDragging
-                    ? "Release to upload"
-                    : "Drag & drop your HTML file here"}
+                  {isDragging ? "Release to upload" : "Drag & drop your HTML file here"}
                 </p>
                 <p className="text-xs text-muted-foreground font-normal mt-1.5">
                   or click anywhere to browse
@@ -237,9 +221,7 @@ export default function DashboardPage() {
               {/* Sign in prompt for guests */}
               {!user && (
                 <div className="flex flex-col items-center gap-2 pt-4 border-t border-border mt-2">
-                  <p className="text-xs text-muted-foreground">
-                    Sign in to get shareable links
-                  </p>
+                  <p className="text-xs text-muted-foreground">Sign in to get shareable links</p>
                   <Button
                     variant="outline"
                     size="sm"

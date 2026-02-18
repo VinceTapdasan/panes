@@ -103,9 +103,7 @@ export default function FilesPage() {
               <LogIn className="w-7 h-7 text-muted-foreground/30" />
             </div>
             <div className="text-center">
-              <p className="text-sm font-medium text-foreground">
-                Sign in to view your files
-              </p>
+              <p className="text-sm font-medium text-foreground">Sign in to view your files</p>
               <p className="text-xs text-muted-foreground font-normal mt-1.5 max-w-[240px]">
                 Your uploaded HTML files will appear here
               </p>
@@ -141,9 +139,7 @@ export default function FilesPage() {
       <div className="space-y-4">
         <div className="border-b border-border pb-4">
           <h1 className="text-xl font-semibold text-foreground">Files</h1>
-          <p className="text-sm text-muted-foreground font-normal mt-1">
-            0 files uploaded
-          </p>
+          <p className="text-sm text-muted-foreground font-normal mt-1">0 files uploaded</p>
         </div>
 
         <Card className="bg-card border-border">
@@ -202,9 +198,7 @@ export default function FilesPage() {
                 <TableCell className="font-medium">
                   <div className="flex items-center gap-2">
                     <FileCode className="w-4 h-4 text-muted-foreground shrink-0" />
-                    <span className="truncate max-w-[200px]">
-                      {pane.originalName}
-                    </span>
+                    <span className="truncate max-w-[200px]">{pane.originalName}</span>
                   </div>
                 </TableCell>
                 <TableCell className="text-muted-foreground">
@@ -222,7 +216,7 @@ export default function FilesPage() {
                     className={cn(
                       "text-[10px]",
                       getTimeRemaining(pane.expiresAt) === "Expired" &&
-                        "bg-destructive/10 text-destructive"
+                        "bg-destructive/10 text-destructive",
                     )}
                   >
                     {getTimeRemaining(pane.expiresAt)}
@@ -242,12 +236,7 @@ export default function FilesPage() {
                         <Copy className="w-4 h-4" />
                       )}
                     </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="h-8 w-8 p-0"
-                      asChild
-                    >
+                    <Button variant="ghost" size="sm" className="h-8 w-8 p-0" asChild>
                       <a href={pane.shareUrl} target="_blank" rel="noopener">
                         <ExternalLink className="w-4 h-4" />
                       </a>
